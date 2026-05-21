@@ -1,0 +1,700 @@
+/* Reset CSS & Variables */
+:root {
+    --bg-dark: #000000;
+    --bg-light: #ffffff;
+    --text-light: #ffffff;
+    --text-dark: #121212;
+    --accent-color: #ff00bf; /* Màu hồng magenta giống trong ảnh */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: none; /* Ẩn con trỏ mặc định để dùng custom cursor */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+/* Custom Cursor - Cập nhật tối ưu hiển thị */
+.custom-cursor {
+    width: 14px;
+    height: 14px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    position: fixed;
+    top: -50px; /* Tránh bị giật khi vừa load trang */
+    left: -50px;
+    pointer-events: none; /* Tránh cản trở tương tác click */
+    z-index: 10000; /* Luôn nổi trên cùng, kể cả header */
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+    will-change: top, left;
+}
+
+/* Header (Đã đổi lại nền màu trắng và mỏng lại) */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-light); /* Khôi phục nền màu trắng */
+    z-index: 100;
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Đường kẻ viền mỏng tinh tế */
+}
+
+/* Ticker đen ở trên cùng (Đã thu mỏng kích thước) */
+.ticker-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    white-space: nowrap;
+    padding: 6px 0; /* Thu hẹp từ 10px xuống 6px */
+    font-size: 0.7rem; /* Giảm cỡ chữ xuống 0.7rem để cân đối hơn */
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ticker-scroll {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-animation 15s linear infinite; /* Chạy liên tục mượt mà */
+}
+
+.ticker-scroll span {
+    display: inline-block;
+    padding-right: 3rem; /* Khoảng cách giữa các cụm chữ */
+}
+
+.ticker-star {
+    color: var(--accent-color); /* Ngôi sao có màu hồng magenta */
+}
+
+/* Thanh điều hướng (Đã đổi màu chữ sang màu đen và thu hẹp padding dọc) */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px; /* Thu nhỏ khoảng dọc từ 20px xuống còn 10px */
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-dark); /* Đổi lại sang màu đen */
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+}
+
+.logo {
+    color: var(--text-dark); /* Đổi logo sang màu đen */
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: -0.15em;
+    display: flex;
+    gap: 2px;
+}
+
+.logo span:last-child {
+    transform: translateY(4px);
+}
+
+/* Điều chỉnh lại khoảng cách của Hero Section dưới Header trắng */
+.hero-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 72px; /* Giảm từ 110px xuống 72px để loại bỏ khoảng trắng dư thừa */
+    background-color: var(--bg-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.hero-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.scroll-down-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-light);
+    animation: bounce 2s infinite;
+}
+
+.scroll-down-indicator svg {
+    width: 30px;
+    height: 30px;
+}
+
+/* Dark Content */
+.dark-content {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    padding: 100px 20px;
+    text-align: center;
+}
+
+/* Title Section */
+.title-section {
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+}
+
+.category-tags {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 40px;
+}
+
+.main-title {
+    font-size: 5.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 30px;
+}
+
+.italic-title {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.subtitle {
+    font-size: 1.8rem;
+    font-weight: 300;
+    max-width: 650px;
+    margin: 0 auto 40px auto;
+    line-height: 1.4;
+    opacity: 0.9;
+}
+
+.divider {
+    width: 60px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 0 auto;
+}
+
+/* Description Section */
+.description-section {
+    max-width: 700px;
+    margin: 0 auto 100px auto;
+}
+
+.lead-text {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+.body-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    opacity: 0.7;
+    margin-bottom: 50px;
+}
+
+.down-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+/* Video Section */
+.video-section {
+    max-width: 960px; /* Giảm từ 1200px xuống 960px để video nhỏ hơn và cân đối hơn */
+    margin: 0 auto;
+    padding: 0 20px;  /* Thêm khoảng đệm hai bên để không bị sát lề màn hình */
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Giữ nguyên tỉ lệ màn hình 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px; /* Bo tròn góc nhẹ cho video trông hiện đại hơn */
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Scroll To Top */
+.scroll-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 99;
+    color: var(--text-light);
+    display: none;
+    transition: opacity 0.3s;
+}
+
+.scroll-to-top svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* Animations */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, 0);
+    }
+    40% {
+        transform: translate(-50%, -10px);
+    }
+    60% {
+        transform: translate(-50%, -5px);
+    }
+}
+
+@keyframes ticker-animation {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-33.3333%, 0, 0);
+    }
+}
+
+
+/* ========================================== */
+/* KHU VỰC CÁC PHẦN NỘI DUNG MỚI (BTS & OOH)  */
+/* ========================================== */
+
+/* 1. Phần giới thiệu hậu trường (BTS Intro) */
+.bts-intro-section {
+    padding: 120px 20px 60px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.bts-main-heading {
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 30px;
+    color: var(--text-light);
+}
+
+.bts-sub-heading {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+/* 2. Lưới ảnh BTS 2 cột */
+.bts-grid-section {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 6px auto;
+    padding: 0 10px;
+}
+
+.bts-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px; /* Khoảng giãn cách mỏng giữa hai ảnh */
+}
+
+.bts-grid-item {
+    overflow: hidden;
+    display: flex;
+    background-color: #121212;
+}
+
+.bts-grid-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 4 / 3; /* Đảm bảo cả hai ảnh giữ nguyên tỷ lệ bằng nhau */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Hiệu ứng phóng to nhẹ nhàng khi rê chuột qua hình ảnh */
+.bts-grid-item:hover img {
+    transform: scale(1.03);
+}
+
+/* 3. Phần hình ảnh Billboard (OOH) */
+.billboard-section {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 10px 100px 10px;
+}
+
+.billboard-wrapper {
+    overflow: hidden;
+    background-color: #121212;
+    display: flex;
+}
+
+.billboard-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Responsive bổ sung cho phần nội dung mới */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 3.5rem;
+    }
+    .subtitle {
+        font-size: 1.4rem;
+    }
+    .nav-container {
+        padding: 0 20px;
+    }
+    .hero-section {
+        padding-top: 80px; /* Thích ứng trên màn hình nhỏ */
+    }
+
+    /* Định dạng lại màn hình nhỏ cho các phần mới */
+    .bts-intro-section {
+        padding: 80px 15px 40px 15px;
+    }
+
+    .bts-main-heading {
+        font-size: 2.2rem;
+    }
+
+    .bts-sub-heading {
+        font-size: 1rem;
+    }
+
+    .bts-grid-container {
+        grid-template-columns: 1fr; /* Chuyển thành 1 cột xếp chồng trên di động */
+        gap: 12px;
+    }
+
+    .bts-grid-section,
+    .billboard-section {
+        padding: 0 15px;
+    }
+
+    .billboard-section {
+        padding-bottom: 60px;
+    }
+}
+
+/* ========================================== */
+/* PHO BOWL FLOATING DECORATION               */
+/* ========================================== */
+
+.pho-intro-section {
+    position: relative;
+    overflow: visible;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.pho-bowl-float {
+    position: relative;
+    width: 900px;
+    height: 500px;
+    margin: 0 auto 20px auto;
+    animation: pho-float 7s ease-in-out infinite;
+}
+
+/* Xóa hoàn toàn vòng chữ orbit */
+.pho-bowl-float::after {
+    display: none;
+}
+
+/* Chỉ giữ glow rất nhẹ, không màu tím nữa */
+.pho-bowl-float::before {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0.5) 0%,
+        transparent 70%
+    );
+    animation: shadow-float 7s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.pho-bowl-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    user-select: none;
+    /* Đổ bóng tinh tế, không màu */
+    filter: drop-shadow(0 40px 40px rgba(0, 0, 0, 0.5))
+            drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    transition: filter 0.6s ease, transform 0.6s ease;
+    transform: rotate(-5deg);
+    animation: none; /* Bỏ animation riêng, để parent handle */
+}
+
+.pho-bowl-float:hover .pho-bowl-img {
+    transform: rotate(0deg) scale(1.04);
+    filter: drop-shadow(0 50px 50px rgba(0, 0, 0, 0.6))
+            drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+}
+
+@keyframes pho-float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes shadow-float {
+    0%, 100% {
+        transform: translateX(-50%) scaleX(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateX(-50%) scaleX(0.7);
+        opacity: 0.4;
+    }
+}
+
+@media (max-width: 768px) {
+    .pho-bowl-float {
+        width: 240px;
+        height: 240px;
+    }
+}
+
+/* ========================================== */
+/* CREDITS & MEMBERS SECTION (ĐÃ SỬA LỖI BỊ CẮT) */
+/* ========================================== */
+
+.credits-section {
+    background-color: var(--bg-dark); /* Đảm bảo nền đen đồng nhất */
+    padding: 130px 40px 100px 40px; /* Tăng padding-top để đẩy nội dung khỏi Header cố định */
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.credits-subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-color); /* Sắc hồng magenta thương hiệu */
+    font-weight: 500;
+    margin-bottom: 60px;
+}
+
+/* Lưới hiển thị các thẻ thành viên */
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Đổi số 5 thành số lượng thành viên thực tế của bạn nếu cần */
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px; /* Khống chế chiều rộng tối đa tránh tràn lề */
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.member-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Định dạng khung ảnh dọc bo góc sâu (Capsule Card) giống trong ảnh */
+.member-image-wrapper {
+    width: 100%;
+    aspect-ratio: 3 / 4;    /* Chuyển sang tỷ lệ khung dọc 3:4 chuẩn chỉnh */
+    max-height: 52vh;       /* Khống chế chiều cao ảnh theo chiều cao màn hình để không bị tràn dọc */
+    border-radius: 40px;    /* Bo góc sâu ở 4 cạnh */
+    overflow: hidden;
+    background-color: #121212;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: border-color 0.4s ease, transform 0.4s ease;
+}
+
+.member-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* Giữ nguyên tỷ lệ khuôn mặt, tự động cắt viền */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Hiệu ứng tương tác mượt khi rê chuột qua thành viên */
+.member-card:hover .member-image-wrapper {
+    border-color: var(--accent-color); /* Đổi viền sang màu hồng thương hiệu */
+    transform: scale(1.03);
+}
+
+.member-card:hover .member-image-wrapper img {
+    transform: scale(1.08); /* Zoom nhẹ bức ảnh phía trong */
+}
+
+/* Nhãn tên dạng nút màu trắng bo tròn (Capsule) */
+.member-name {
+    background-color: #ffffff; /* Nền nút màu trắng */
+    color: #121212;           /* Chữ màu đen giống ảnh mẫu */
+    padding: 12px 24px;       /* Tạo độ dày rộng cho nút */
+    border-radius: 35px;      /* Bo tròn hoàn toàn hai đầu của nút */
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: inline-block;
+    width: 90%;               /* Co giãn tự động vừa vặn theo chiều rộng ảnh */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Tạo bóng mờ */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;      /* Đảm bảo tên không bị xuống dòng */
+    margin-bottom: 5px;
+}
+
+.member-role {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-top: 8px;
+}
+
+/* Thiết lập Responsive tự động xuống dòng trên thiết bị di động */
+@media (max-width: 992px) {
+    .members-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 cột trên máy tính bảng */
+        gap: 25px;
+    }
+}
+
+@media (max-width: 576px) {
+    .members-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cột trên điện thoại nhỏ */
+        gap: 15px;
+    }
+    .member-image-wrapper {
+        border-radius: 25px; /* Bo nhẹ góc khi hiển thị trên mobile */
+    }
+    .member-name {
+        font-size: 0.85rem;
+        padding: 10px 15px;
+    }
+}
+
+/* ========================================== */
+/* KHU VỰC CHỮ "THE END" CHẠY NGANG           */
+/* ========================================== */
+
+/* Khung chứa để ẩn phần chữ thừa khi chạy ra ngoài màn hình */
+.credits-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+    padding: 60px 0; /* Tăng khoảng cách đệm trên dưới */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Xếp dọc: Chữ chạy ở trên, ảnh ở dưới */
+    align-items: center;    /* Căn giữa ảnh theo chiều ngang */
+    gap: 40px;              /* Khoảng cách giữa dòng chữ chạy và ảnh */
+}
+
+/* Khung chứa các chữ để di chuyển cùng nhau */
+.credits-track {
+    display: inline-block;
+    white-space: nowrap;    /* Giữ dòng chữ trên một dòng thẳng */
+    padding-left: 100%;     /* Bắt đầu xuất hiện từ phía bên phải màn hình */
+    animation: chay-lien-tuc 40s linear infinite;
+}
+
+/* Định dạng chữ lớn */
+.credits-title {
+    display: inline-block;
+    font-size: 7rem; 
+    font-weight: bold;
+    color: var(--text-light);
+    margin-right: 120px;    /* Khoảng cách giữa các cụm chữ */
+    letter-spacing: 0.05em;
+}
+
+/* Định dạng cho khung chứa ảnh */
+.credits-image-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Định dạng ảnh duy nhất phía dưới */
+.credits-single-img {
+    max-width: 90%;         /* Tránh ảnh bị quá to trên màn hình nhỏ */
+    width: 450px;           /* Bạn có thể tăng/giảm số này để chỉnh kích thước ảnh */
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;     /* Bo tròn nhẹ góc ảnh nếu muốn (tùy chọn) */
+}
+
+@keyframes chay-lien-tuc {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+/* Hỗ trợ hiển thị trên thiết bị di động */
+@media (max-width: 768px) {
+    .credits-title {
+        font-size: 4rem;    /* Thu nhỏ chữ trên điện thoại */
+        margin-right: 60px;
+    }
+    .credits-single-img {
+        width: 280px;       /* Thu nhỏ ảnh trên điện thoại */
+    }
+    .credits-container {
+        gap: 20px;          /* Giảm khoảng cách giữa chữ và ảnh trên màn hình nhỏ */
+    }
+}
